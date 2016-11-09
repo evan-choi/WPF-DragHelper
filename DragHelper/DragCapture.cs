@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using System.Collections.Generic;
+using System;
 
 namespace DragHelper
 {
@@ -151,9 +152,7 @@ namespace DragHelper
 
             if (item.IsDragging)
             {
-                item.Stop();
-                item.IsDragging = false;
-                item.InputTarget.RaiseEvent(new DragEventArgs(DragEndEvent, item));
+                EndDrag(item);
 
                 e.Handled = true;
             }
@@ -162,9 +161,24 @@ namespace DragHelper
         private static void Element_PreviewMouseMove(object sender, MouseEventArgs e)
         {
             var item = dragDatas[sender as IInputElement];
-
+            
             if (item.IsDragging)
+            {
+                if (Mouse.LeftButton == MouseButtonState.Released)
+                {
+                    EndDrag(item);
+                    return;
+                }
+
                 item.InputTarget.RaiseEvent(new DragEventArgs(DragEvent, item));
+            }
+        }
+
+        private static void EndDrag(DragData item)
+        {
+            item.Stop();
+            item.IsDragging = false;
+            item.InputTarget.RaiseEvent(new DragEventArgs(DragEndEvent, item));
         }
         #endregion
     }
