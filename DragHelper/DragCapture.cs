@@ -31,32 +31,32 @@ namespace DragHelper
         #endregion
 
         #region [ Routed Event Extension ]
-        public static void AddDragHandler(this IInputElement element, DragRoutedEventHandler handler)
+        public static void AddDragHandler(this UIElement element, DragRoutedEventHandler handler)
         {
             element.AddHandler(DragEvent, handler);
         }
 
-        public static void AddDragBeginHandler(this IInputElement element, DragRoutedEventHandler handler)
+        public static void AddDragBeginHandler(this UIElement element, DragRoutedEventHandler handler)
         {
             element.AddHandler(DragBeginEvent, handler);
         }
 
-        public static void AddDragEndHandler(this IInputElement element, DragRoutedEventHandler handler)
+        public static void AddDragEndHandler(this UIElement element, DragRoutedEventHandler handler)
         {
             element.AddHandler(DragEndEvent, handler);
         }
 
-        public static void RemoveDragHandler(this IInputElement element, DragRoutedEventHandler handler)
+        public static void RemoveDragHandler(this UIElement element, DragRoutedEventHandler handler)
         {
             element.RemoveHandler(DragEvent, handler);
         }
 
-        public static void RemoveDragBeginHandler(this IInputElement element, DragRoutedEventHandler handler)
+        public static void RemoveDragBeginHandler(this UIElement element, DragRoutedEventHandler handler)
         {
             element.RemoveHandler(DragBeginEvent, handler);
         }
 
-        public static void RemoveDragEndHandler(this IInputElement element, DragRoutedEventHandler handler)
+        public static void RemoveDragEndHandler(this UIElement element, DragRoutedEventHandler handler)
         {
             element.RemoveHandler(DragEndEvent, handler);
         }
@@ -91,6 +91,20 @@ namespace DragHelper
 
             if (Mouse.Captured.Equals(element))
                 element.ReleaseMouseCapture();
+        }
+        
+        // Xaml Extension
+        public static void SetDraggable(this UIElement element, bool value)
+        {
+            if (value)
+                Register(element);
+            else
+                Unregister(element);
+        }
+
+        public static bool GetDraggable(this UIElement element)
+        {
+            return dragDatas.ContainsKey(element);
         }
         #endregion
 

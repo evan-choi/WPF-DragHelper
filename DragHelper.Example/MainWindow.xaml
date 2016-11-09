@@ -4,9 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DragHelper.Example"
+        xmlns:drag="clr-namespace:DragHelper;assembly=DragHelper"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Canvas x:Name="cvs" Background="Green" 
+                drag:DragCapture.Draggable="true"
+                drag:DragCapture.Drag="drag">
+        </Canvas>
     </Grid>
 </Window>

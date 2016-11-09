@@ -15,14 +15,16 @@ using System.Windows.Shapes;
 
 namespace DragHelper.Example
 {
-    /// <summary>
-    /// MainWindow.xaml에 대한 상호 작용 논리
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void drag(object sender, DragEventArgs args)
+        {
+            this.Title = args.DragData.Delta.ToString();
         }
     }
 }
