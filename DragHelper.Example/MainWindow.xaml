@@ -18,14 +18,9 @@
                      drag:DragCapture.DragBegin="Ellipse_DragBegin"
                      drag:DragCapture.DragEnd="Ellipse_DragEnd"
                      drag:DragCapture.Drag="Ellipse_Drag"/>
-            <Ellipse Width="60" Height="60"
+            <Ellipse x:Name="ellipse" Width="60" Height="60"
                      Fill="#e74c3c"
-                     Canvas.Left="320" Canvas.Top="100"
-                     drag:DragCapture.Draggable="True"
-                     drag:DragCapture.RelativeTarget="{x:Reference Name=canvas}"
-                     drag:DragCapture.DragBegin="Ellipse_DragBegin"
-                     drag:DragCapture.DragEnd="Ellipse_DragEnd"
-                     drag:DragCapture.Drag="Ellipse_Drag"/>
+                     Canvas.Left="320" Canvas.Top="100"/>
         </Canvas>
 
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,18,0,0">

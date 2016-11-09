@@ -23,6 +23,13 @@ namespace DragHelper.Example
         public MainWindow()
         {
             InitializeComponent();
+
+            // red ellipse
+            // same as Blue Ellipse (XAML)
+            DragCapture.Register(ellipse, canvas);
+            ellipse.AddDragBeginHandler(new DragCapture.DragRoutedEventHandler(Ellipse_DragBegin));
+            ellipse.AddDragEndHandler(new DragCapture.DragRoutedEventHandler(Ellipse_DragEnd));
+            ellipse.AddDragHandler(new DragCapture.DragRoutedEventHandler(Ellipse_Drag));
         }
 
         private void Ellipse_Drag(object sender, DragEventArgs args)
