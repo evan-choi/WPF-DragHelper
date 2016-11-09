@@ -9,7 +9,7 @@ namespace DragHelper
         #region [ Properties ]
         public IInputElement InputTarget { get; }
 
-        public UIElement RelativeTarget { get; }
+        public UIElement RelativeTarget { get; internal set; }
 
         public DateTime StartTime { get; set; }
 

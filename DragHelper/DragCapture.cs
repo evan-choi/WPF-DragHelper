@@ -94,7 +94,7 @@ namespace DragHelper
         }
         
         // Xaml Extension
-        public static void SetDraggable(this UIElement element, bool value)
+        public static void SetDraggable(UIElement element, bool value)
         {
             if (value)
                 Register(element);
@@ -102,9 +102,23 @@ namespace DragHelper
                 Unregister(element);
         }
 
-        public static bool GetDraggable(this UIElement element)
+        public static bool GetDraggable(UIElement element)
         {
             return dragDatas.ContainsKey(element);
+        }
+
+        public static void SetRelativeTarget(UIElement element, UIElement target)
+        {
+            if (dragDatas.ContainsKey(element))
+                dragDatas[element].RelativeTarget = target;
+        }
+
+        public static UIElement GetRelativeTarget(UIElement element)
+        {
+            if (dragDatas.ContainsKey(element))
+                return dragDatas[element].RelativeTarget;
+
+            return null;
         }
         #endregion
 
@@ -117,11 +131,14 @@ namespace DragHelper
             {
                 item.Start();
 
-                var args = new RoutedEventArgs(DragBeginEvent, item);
+                var args = new DragEventArgs(DragBeginEvent, item);
                 item.InputTarget.RaiseEvent(args);
 
                 if (args.Handled)
+                {
+                    item.Stop();
                     return;
+                }
 
                 item.IsDragging = true;
                 e.Handled = true;
@@ -136,7 +153,7 @@ namespace DragHelper
             {
                 item.Stop();
                 item.IsDragging = false;
-                item.InputTarget.RaiseEvent(new RoutedEventArgs(DragEndEvent, item));
+                item.InputTarget.RaiseEvent(new DragEventArgs(DragEndEvent, item));
 
                 e.Handled = true;
             }
