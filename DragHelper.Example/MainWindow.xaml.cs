@@ -18,6 +18,7 @@ namespace DragHelper.Example
     public partial class MainWindow : Window
     {
         Point objPosition;
+        Ellipse lastEllipse;
 
         public MainWindow()
         {
@@ -41,8 +42,16 @@ namespace DragHelper.Example
             // Canvas Dragging
             Ellipse e = sender as Ellipse;
 
-            Canvas.SetLeft(e, objPosition.X + args.DragData.Delta.X);
-            Canvas.SetTop(e, objPosition.Y + args.DragData.Delta.Y);
+            if (cbDirect.IsChecked.Value)
+            {
+                Canvas.SetLeft(e, args.DragData.CurrentPosition.X);
+                Canvas.SetTop(e, args.DragData.CurrentPosition.Y);
+            }
+            else
+            {
+                Canvas.SetLeft(e, objPosition.X + args.DragData.Delta.X);
+                Canvas.SetTop(e, objPosition.Y + args.DragData.Delta.Y);
+            }
         }
 
         private void Ellipse_DragBegin(object sender, DragEventArgs args)
@@ -55,17 +64,24 @@ namespace DragHelper.Example
             }
 
             Ellipse e = sender as Ellipse;
+
             objPosition = new Point(Canvas.GetLeft(e), Canvas.GetTop(e));
+
+            Canvas.SetZIndex(e, 1);
+            if (lastEllipse != null)
+                Canvas.SetZIndex(lastEllipse, 0);
+
+            lastEllipse = e;
         }
 
         private void Ellipse_DragEnd(object sender, DragEventArgs args)
         {
-            MessageBox.Show("Drag End");
+            //MessageBox.Show("Drag End");
 
-            Ellipse e = sender as Ellipse;
+            //Ellipse e = sender as Ellipse;
 
-            Canvas.SetLeft(e, objPosition.X);
-            Canvas.SetTop(e, objPosition.Y);
+            //Canvas.SetLeft(e, objPosition.X);
+            //Canvas.SetTop(e, objPosition.Y);
         }
     }
 }
