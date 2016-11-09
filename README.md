@@ -45,7 +45,7 @@ DragCapture.Unregister(<IInputElement>);
 <UIElement>.AddDragHandler(new DragCapture.DragRoutedEventHandler(<Handler>));
 ```
 
-**Drag Canceling**
+**Drag Cancel Handling**
 ```cs
 void IInputElement_DragBegin(object sender, DragEventArgs e)
 {
