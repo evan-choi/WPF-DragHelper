@@ -7,7 +7,7 @@ namespace DragHelper
     public static class DragCapture
     {
         #region [ Routed Event ]
-        public delegate void DragRoutedEventHandler(object sender, DragEventArgs args);
+        public delegate void DragRoutedEventHandler(object sender, DragEventArgs e);
 
         public static readonly RoutedEvent DragEvent =
             EventManager.RegisterRoutedEvent("Drag", RoutingStrategy.Direct, typeof(DragRoutedEventHandler), typeof(DragData));

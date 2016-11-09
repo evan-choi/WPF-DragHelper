@@ -32,56 +32,56 @@ namespace DragHelper.Example
             ellipse.AddDragHandler(new DragCapture.DragRoutedEventHandler(Ellipse_Drag));
         }
 
-        private void Ellipse_Drag(object sender, DragEventArgs args)
+        private void Ellipse_Drag(object sender, DragEventArgs e)
         {
             // Drag Start Position on RelativeTarget or InputTarget
-            this.tbSPos.Text = $"StartPosition: {args.DragData.StartPosition}";
+            this.tbSPos.Text = $"StartPosition: {e.DragData.StartPosition}";
 
             // Drag Current Position on RelativeTarget or InputTarget
-            this.tbPos.Text = $"CurrentPosition: {args.DragData.CurrentPosition}";
+            this.tbPos.Text = $"CurrentPosition: {e.DragData.CurrentPosition}";
 
             // Drag Delta (CurrentPosition - StartPosition)
-            this.tbDelta.Text = $"Delta: {args.DragData.Delta}";
+            this.tbDelta.Text = $"Delta: {e.DragData.Delta}";
 
             // Drag Elapsed Time
-            this.tbElapsed.Text = $"Elapsed: {args.DragData.ElapsedTimespan}";
+            this.tbElapsed.Text = $"Elapsed: {e.DragData.ElapsedTimespan}";
 
             // Canvas Dragging
-            Ellipse e = sender as Ellipse;
+            Ellipse ellipse = sender as Ellipse;
 
             if (cbDirect.IsChecked.Value)
             {
-                Canvas.SetLeft(e, args.DragData.CurrentPosition.X);
-                Canvas.SetTop(e, args.DragData.CurrentPosition.Y);
+                Canvas.SetLeft(ellipse, e.DragData.CurrentPosition.X);
+                Canvas.SetTop(ellipse, e.DragData.CurrentPosition.Y);
             }
             else
             {
-                Canvas.SetLeft(e, objPosition.X + args.DragData.Delta.X);
-                Canvas.SetTop(e, objPosition.Y + args.DragData.Delta.Y);
+                Canvas.SetLeft(ellipse, objPosition.X + e.DragData.Delta.X);
+                Canvas.SetTop(ellipse, objPosition.Y + e.DragData.Delta.Y);
             }
         }
 
-        private void Ellipse_DragBegin(object sender, DragEventArgs args)
+        private void Ellipse_DragBegin(object sender, DragEventArgs e)
         {
             // if you want to cancel
             if (cbCancel.IsChecked.Value)
             {
-                args.Handled = true;
+                e.Handled = true;
                 return;
             }
 
-            Ellipse e = sender as Ellipse;
+            Ellipse ellipse = sender as Ellipse;
 
-            objPosition = new Point(Canvas.GetLeft(e), Canvas.GetTop(e));
+            objPosition = new Point(Canvas.GetLeft(ellipse), Canvas.GetTop(ellipse));
 
-            Canvas.SetZIndex(e, 1);
+            Canvas.SetZIndex(ellipse, 1);
             if (lastEllipse != null)
                 Canvas.SetZIndex(lastEllipse, 0);
 
-            lastEllipse = e;
+            lastEllipse = ellipse;
         }
 
-        private void Ellipse_DragEnd(object sender, DragEventArgs args)
+        private void Ellipse_DragEnd(object sender, DragEventArgs e)
         {
             //MessageBox.Show("Drag End");
 
