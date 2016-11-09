@@ -14,7 +14,7 @@ xmlns:drag="clr-namespace:DragHelper;assembly=DragHelper"
 ```cs
 using DragHelper;
 ```
-
+<br />
 **Usage on xaml**
 ```xml
 <Ellipse drag:DragCapture.Draggable="True"  
@@ -22,7 +22,7 @@ using DragHelper;
          drag:DragCapture.DragEnd="Ellipse_DragEnd"
          drag:DragCapture.Drag="Ellipse_Drag"/>
 ```
-
+<br />
 **Drag Registration**
 ```cs
 // Register Draggable object
