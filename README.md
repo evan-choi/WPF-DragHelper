@@ -1,5 +1,5 @@
 # WPF DragHelper
-WPF IInputelement Drag Event Helper
+WPF IInputElement Drag Event Helper
 
 A library help to IInputElement dragging
 
